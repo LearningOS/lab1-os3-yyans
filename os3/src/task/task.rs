@@ -1,13 +1,17 @@
 //! Types related to task management
 
+use alloc::vec::Vec;
+
 use super::TaskContext;
 
-#[derive(Copy, Clone)]
+#[derive(Clone)]
 /// task control block structure
 pub struct TaskControlBlock {
     pub task_status: TaskStatus,
     pub task_cx: TaskContext,
     // LAB1: Add whatever you need about the Task.
+    pub start_time: usize,
+    pub syscall_times: Vec<u32>,
 }
 
 #[derive(Copy, Clone, PartialEq)]
