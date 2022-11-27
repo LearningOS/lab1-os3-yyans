@@ -22,6 +22,11 @@ mod task;
 mod timer;
 mod trap;
 
+use core::char::MAX;
+
+use config::{MAX_SYSCALL_NUM, MAX_APP_NUM};
+use lazy_static::*;
+
 core::arch::global_asm!(include_str!("entry.asm"));
 core::arch::global_asm!(include_str!("link_app.S"));
 
@@ -47,5 +52,6 @@ pub fn rust_main() -> ! {
     trap::enable_timer_interrupt();
     timer::set_next_trigger();
     task::run_first_task();
+
     panic!("Unreachable in rust_main!");
 }
