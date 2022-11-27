@@ -45,36 +45,13 @@ fn clear_bss() {
 pub fn rust_main() -> ! {
     clear_bss();
     logging::init();
-    // println!("[kernel] Hello, world!");
-    // heap_alloc::init_heap();
-    // trap::init();
-    // loader::load_apps();
-    // trap::enable_timer_interrupt();
-    // timer::set_next_trigger();
-    // task::run_first_task();
-
-    println!("{}", TEST.arr[0].h1[1]);
+    println!("[kernel] Hello, world!");
+    heap_alloc::init_heap();
+    trap::init();
+    loader::load_apps();
+    trap::enable_timer_interrupt();
+    timer::set_next_trigger();
+    task::run_first_task();
 
     panic!("Unreachable in rust_main!");
 }
-
-lazy_static! {
-    pub static ref TEST: test2 = {
-        test2 {
-            arr: [test {
-                h1: [1; MAX_SYSCALL_NUM],
-            }; MAX_APP_NUM]
-        }
-    };
-}
-
-#[derive(Clone, Copy)]
-pub struct test2 {
-    pub arr: [test;MAX_APP_NUM],
-}
-
-#[derive(Clone, Copy)]
-pub struct test {
-    pub h1: [u32; MAX_SYSCALL_NUM],
-}
-

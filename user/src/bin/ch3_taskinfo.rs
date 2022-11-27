@@ -17,6 +17,10 @@ pub fn main() -> usize {
     let t2 = get_time() as usize;
     // 注意本次 task info 调用也计入
     assert_eq!(0, task_info(&info));
+
+    println!("time: {}", info.time);
+    println!("systask: {}", info.syscall_times[SYSCALL_TASK_INFO]);
+    println!("gettime: {}", info.syscall_times[SYSCALL_GETTIMEOFDAY]);
     let t3 = get_time() as usize;
     assert!(3 <= info.syscall_times[SYSCALL_GETTIMEOFDAY]);
     assert_eq!(1, info.syscall_times[SYSCALL_TASK_INFO]);
